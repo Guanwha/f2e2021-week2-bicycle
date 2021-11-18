@@ -49,10 +49,11 @@ module.exports = {
     },
     extend: {
       colors: {
-        'main-500': '#65895F',
-        'main-400': '#7F977B',
-  
-        'tag-500': '#BEA363',
+        'main-500': '#FED801',
+        'second-900': '#000000',
+        'second-500': '#7A7A7A',
+        'second-200': '#D2D2D2',
+        'second-100': '#F6F7FB',
       },
     },
   },
