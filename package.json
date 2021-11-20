@@ -48,12 +48,7 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "max-len": [
-        "error",
-        {
-          "code": 511
-        }
-      ],
+      "max-len": 0,
       "brace-style": [
         "error",
         "stroustrup",
