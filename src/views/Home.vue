@@ -2,7 +2,7 @@
   <div class="w-full h-full flex-ccc bg-main-500">
     <div class="lex-csbc">
       <div class="flex-ctl">
-        <img src="@/assets/kt/logo_bike.svg" alt="">
+        <LottieSVG class="h-16" :animation-data="youbikeJson"></LottieSVG>
         <img src="@/assets/kt/Logo.svg" alt="" class="w-60">
         <div class="text-sm font-bold letter-space-title">微笑單車．暢遊城市</div>
       </div>
@@ -23,10 +23,18 @@
 
 <script>
 // @ is an alias to /src
+import LottieSVG from '@/components/LottieSVG.vue';
+import youbikeJson from '@/assets/kt/youbike.json';
 
 export default {
   name: 'Home',
   components: {
+    LottieSVG,
+  },
+  data() {
+    return {
+      youbikeJson,
+    };
   },
   methods: {
     gotoFindBike() {
