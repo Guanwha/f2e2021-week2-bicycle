@@ -60,4 +60,12 @@ export default {
     transform: translateX(100%);
   }
 }
+.return {
+  rect {
+    @apply fill-main-500;
+  }
+  path {
+    @apply fill-second-900;
+  }
+}
 </style>

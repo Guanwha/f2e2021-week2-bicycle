@@ -56,6 +56,13 @@ module.exports = {
         'second-200': '#D2D2D2',
         'second-100': '#F6F7FB',
       },
+      fill: {
+        'main-500': '#FED801',
+        'second-900': '#000000',
+        'second-500': '#7A7A7A',
+        'second-200': '#D2D2D2',
+        'second-100': '#F6F7FB',
+      },
       minWidth: {
         80: '20rem',
       },
