@@ -1,4 +1,5 @@
-@responsive {
+@tailwind utilities;
+@layer utilities {
   @mixin hide-text {
     text-indent: 110%;
     // white-space: nowrap;
