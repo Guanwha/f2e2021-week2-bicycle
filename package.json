@@ -84,7 +84,8 @@
             "_attributes"
           ]
         }
-      ]
+      ],
+      "vue/no-unused-components": ["warn"]
     }
   },
   "browserslist": [
