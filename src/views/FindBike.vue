@@ -19,7 +19,7 @@
     </div>
     <!-- map -->
     <div class="h-full">
-      <MapFindBike/>
+      <MapFindBike :show-rent="isRent"/>
     </div>
     <!-- footer toggle -->
     <div class="block lg:hidden">

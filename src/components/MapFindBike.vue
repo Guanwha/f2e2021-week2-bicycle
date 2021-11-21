@@ -1,9 +1,17 @@
 <template>
   <div class="w-full h-full relative">
+    <!-- button go to me -->
     <button type="button" class="z-top absolute bottom-4 right-4 shadow" @click="getUserLocation">
       <img src="@/assets/kt/GPS-2.svg" alt="">
     </button>
-    <l-map ref="map" :zoom="zoom" :center="center" @update:center="centerUpdated">
+    <!-- display: zoom -->
+    <div class="z-top absolute top-2.5 left-12 bg-white font-bold px-2 py-1 rounded border-2">{{ zoom }}</div>
+    <!-- button: search here -->
+    <button type="button" class="z-top absolute-hcenter top-2.5 btn-second px-4 py-2 rounded shadow" @click="searchHere">
+      搜尋此處站點
+    </button>
+    <!-- map -->
+    <l-map ref="map" :zoom="zoom" :center="center" @update:zoom="zoomUpdated" @update:center="centerUpdated">
       <!-- map tiles -->
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
 
@@ -17,18 +25,61 @@
       </l-marker>
 
       <!-- bike station markers -->
+      <template v-if="bikeStations">
+        <template v-for="station in bikeStations">
+          <l-marker :key='station.StationUID'
+                    :lat-lng="[station.StationPosition.PositionLat, station.StationPosition.PositionLon]">
+            <l-icon :icon-anchor="stationMarkerIcon.iconAnchor">
+              <div class="absolute top-0 left-0 font-bold flex-ccc" :class="[(showRent)? 'text-second-900' : 'text-main-500' ]" :style="styleStationMarkerText">{{ displayAvailableNum(station) }}</div>
+              <img v-if="showRent" src="@/assets/kt/icon_gps_rent.svg" alt="">
+              <img v-if="!showRent" src="@/assets/kt/icon_gps_return.svg" alt="">
+              <!-- <LottieSVG class="h-16" :animation-data="userMarkerJson"></LottieSVG> -->
+            </l-icon>
+          </l-marker>
+        </template>
+      </template>
     </l-map>
   </div>
 </template>
 
 <script>
-import LottieSVG from '@/components/LottieSVG.vue';
+import { mapActions, mapGetters } from 'vuex';
+// import LottieSVG from '@/components/LottieSVG.vue';
 import userMarkerJson from '@/assets/kt/youbike.json';
+import { log } from '@/utils/message';
+
+const zoomDistMapping = {
+  1: 1000,
+  2: 1000,
+  3: 1000,
+  4: 1000,
+  5: 1000,
+  6: 1000,
+  7: 1000,
+  8: 1000,
+  9: 1000,
+  10: 1000,
+  11: 1000,
+  12: 1000,
+  13: 1000,
+  14: 1000,
+  15: 1000,
+  16: 1000,
+  // 12: 12800,
+  // 13: 12800,
+  // 14: 6400,
+  // 15: 3200,
+  // 16: 1600,
+  17: 800,
+  18: 400,
+  19: 200,
+  20: 100,
+};
 
 export default {
   name: 'MapFindBike',
   components: {
-    LottieSVG,
+    // LottieSVG,
   },
   props: {
     lat: {
@@ -39,6 +90,7 @@ export default {
       typs: Number,
       default: 121.5143706,
     },
+    showRent: Boolean,
   },
   data() {
     return {
@@ -60,7 +112,12 @@ export default {
       },
 
       // other markers
-      test: true,
+      source: 1,
+      stationMarkerIcon: {
+        iconUrl: '@/assets/kt/icon_gps_rent.svg',
+        iconSize: [36, 50],
+        iconAnchor: [18, 50],
+      },
     };
   },
   mounted() {
@@ -81,7 +138,10 @@ export default {
           this.map.flyTo(this.userLocation);
 
           // search neighbor bike stations
-          // this.getBikeStations().then(()=>{}).catch(()=>{});
+          this.getBikeStations({
+            latlong: this.userLocation,
+            dist: zoomDistMapping[this.zoom],
+          }).then(() => {}).catch(() => {});
         }, () => {
           // error
           console.log('gps get failed');
@@ -96,18 +156,42 @@ export default {
         alert('Geolocation is not supported by this browser.');
       }
     },
-    // updateMapCenter(latlong) {
-    //   if (latlong && latlong[0] && latlong[1]) {
-    //     this.center = latlong;
-    //   }
-    // },
-    centerUpdated(center) {
-      console.log('centerUpdated');
-      this.center = center;
+    searchHere() {
+      // search neighbor bike stations
+      this.getBikeStations({
+        latlong: this.center,
+        dist: zoomDistMapping[this.zoom],
+      }).then(() => {}).catch((msg) => { log(msg, true, false, false, true); });
     },
+    zoomUpdated(zoom) {
+      this.zoom = zoom;
+    },
+    centerUpdated(center) {
+      this.center = [center.lat, center.lng];
+    },
+
+    /**
+     * ui display
+     */
+    displayAvailableNum(station) {
+      if (station && station.availability) {
+        return (this.showRent) ? station.availability.AvailableRentBikes : station.availability.AvailableReturnBikes;
+      }
+      return 'n/a';
+    },
+
+    ...mapActions('bike', ['getBikeStations']),
   },
   computed: {
-    classMarker() { return ''; },
+    /**
+     * class & style
+     */
+    styleStationMarkerText() { return `width: ${this.stationMarkerIcon.iconSize[0]}px; height: ${this.stationMarkerIcon.iconSize[0]}px`; },
+    bikeStations() {
+      return (this.source === 1) ? this.bikeStationsV1 : this.bikeStationsV2;
+    },
+
+    ...mapGetters('bike', ['bikeStationsTmp', 'bikeStationsV1', 'bikeStationsV2']),
   },
 };
 </script>
