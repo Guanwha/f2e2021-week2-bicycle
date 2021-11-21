@@ -66,6 +66,9 @@ module.exports = {
       minWidth: {
         80: '20rem',
       },
+      zIndex: {
+        'top': 99999,
+      },
     },
   },
   variants: {

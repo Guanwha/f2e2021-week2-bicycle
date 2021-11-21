@@ -19,6 +19,7 @@
     </div>
     <!-- map -->
     <div class="h-full">
+      <MapFindBike/>
     </div>
     <!-- footer toggle -->
     <div class="block lg:hidden">
@@ -31,11 +32,13 @@
 
 <script>
 import ToggleRent from '@/components/ToggleRent.vue';
+import MapFindBike from '@/components/MapFindBike.vue';
 
 export default {
   name: 'FindBike',
   components: {
     ToggleRent,
+    MapFindBike,
   },
   data() {
     return {
