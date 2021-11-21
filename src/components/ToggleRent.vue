@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      isRent: false,
+      isRent: true,
     };
   },
   methods: {
