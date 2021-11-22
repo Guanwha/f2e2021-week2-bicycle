@@ -12,7 +12,7 @@
           <span class="normal">查詢自行車道</span>
           <span class="hover-text">Coming soon...</span>
         </button>
-        <button type="button" class="w-full btn-main-switch-color-test border-main p-2">
+        <button type="button" class="w-full btn-main-switch-color border-main p-2">
           <span class="normal">附近景點、美食</span>
           <span class="hover-text">Coming soon...</span>
         </button>
