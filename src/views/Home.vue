@@ -8,8 +8,14 @@
       </div>
       <div class="mt-28 w-full flex-cbc gap-2">
         <button type="button" class="w-full btn-main border-main p-2" @click="gotoFindBike">尋找 Youbike</button>
-        <button type="button" class="w-full btn-main border-main p-2">查詢自行車道</button>
-        <button type="button" class="w-full btn-main border-main p-2">附近景點、美食</button>
+        <button type="button" class="w-full btn-main-switch-color border-main p-2">
+          <span class="normal">查詢自行車道</span>
+          <span class="hover-text">Coming soon...</span>
+        </button>
+        <button type="button" class="w-full btn-main-switch-color-test border-main p-2">
+          <span class="normal">附近景點、美食</span>
+          <span class="hover-text">Coming soon...</span>
+        </button>
       </div>
     </div>
     <div class="absolute bottom-5 left-5 sm:left-auto sm:right-10 max-w-max text-sm text-second-900">
