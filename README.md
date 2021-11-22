@@ -1,5 +1,4 @@
-# week_2_bicycle
-# [F2E2021] 第二週 - 台灣旅遊景點導覽
+# [F2E2021] 第二週 - 自行車道地圖資訊整合網
 
 ## [Demo](https://guanwha.github.io/f2e2021-week2-bicycle/)
 
