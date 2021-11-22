@@ -10,7 +10,9 @@
   "dependencies": {
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "jssha": "^3.2.0",
     "leaflet": "^1.7.1",
+    "lottie-web": "^5.8.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vue-toast-notification": "^0.6.2",
@@ -48,12 +50,7 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "max-len": [
-        "error",
-        {
-          "code": 511
-        }
-      ],
+      "max-len": 0,
       "brace-style": [
         "error",
         "stroustrup",
@@ -88,6 +85,9 @@
             "_attributes"
           ]
         }
+      ],
+      "vue/no-unused-components": [
+        "warn"
       ]
     }
   },

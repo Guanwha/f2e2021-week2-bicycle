@@ -18,6 +18,7 @@ const log = (msg, showConsole = true, showSuccessToast = false, showWarningToast
     return;
   }
   if (showConsole) {
+    // eslint-disable-next-line
     console.log(msg);
   }
   if (showSuccessToast) {
