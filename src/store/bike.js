@@ -20,13 +20,15 @@ export default {
   actions: {
     getBikeStations(context, payload) {
       return new Promise((resolve, reject) => {
+        const tdxHeader = getTDXHeader();
         const config = {
           method: 'get',
           url: 'https://ptx.transportdata.tw/MOTC/v2/Bike/Station/NearBy?$format=JSON&',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: getTDXHeader(),
+            Authorization: tdxHeader.Authorization,
+            'X-Date': tdxHeader['X-Date'],
           },
         };
 
@@ -69,13 +71,15 @@ export default {
     },
     getBikeAvailabilities(context, payload) {
       return new Promise((resolve, reject) => {
+        const tdxHeader = getTDXHeader();
         const config = {
           method: 'get',
           url: 'https://ptx.transportdata.tw/MOTC/v2/Bike/Availability/NearBy?$format=JSON&',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${token}`,
+            Authorization: tdxHeader.Authorization,
+            'X-Date': tdxHeader['X-Date'],
           },
         };
 

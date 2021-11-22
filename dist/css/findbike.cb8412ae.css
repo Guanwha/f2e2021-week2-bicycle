@@ -1,0 +1,1 @@
+.toggle{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.toggle:before{content:"";position:absolute;top:0;left:0;width:50%;height:100%;--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-opacity));transition-duration:.3s}.toggle.return:before{transform:translateX(100%)}.return rect{fill:#fed801}.return path{fill:#000}
