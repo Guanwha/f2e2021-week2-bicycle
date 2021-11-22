@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "jssha": "^3.2.0",
     "leaflet": "^1.7.1",
     "lottie-web": "^5.8.1",
     "vue": "^2.6.11",
@@ -85,7 +86,9 @@
           ]
         }
       ],
-      "vue/no-unused-components": ["warn"]
+      "vue/no-unused-components": [
+        "warn"
+      ]
     }
   },
   "browserslist": [

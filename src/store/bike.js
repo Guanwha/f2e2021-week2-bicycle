@@ -2,6 +2,7 @@ import Axios from 'axios';
 import { log, logCatch } from '@/utils/message';
 import { axiosThen } from '@/utils/net';
 import * as types from './types';
+import getTDXHeader from '@/utils/tdx';
 // const jsonV1 = require('@/utils/data_v1.json');
 // const jsonV2 = require('@/utils/data_v2.json');
 
@@ -25,7 +26,7 @@ export default {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${token}`,
+            Authorization: getTDXHeader(),
           },
         };
 
