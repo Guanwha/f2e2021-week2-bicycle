@@ -187,7 +187,7 @@ export default {
             <div class="font-bold">${station.StationName.Zh_tw}</div>
             <div>${station.StationAddress.Zh_tw}</div>
             <hr class="my-2"/>
-            <div>可藉車輛 <span class="font-bold italic">${station.availability.AvailableRentBikes}</span></div>
+            <div>可借車輛 <span class="font-bold italic">${station.availability.AvailableRentBikes}</span></div>
             <div>可停空位 <span class="font-bold italic">${station.availability.AvailableReturnBikes}</span></div>
           `;
         }
