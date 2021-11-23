@@ -21,7 +21,7 @@
           <img src="@/assets/kt/location.svg" alt="" class="bg-main-500 rounded-full">
           <!-- <LottieSVG class="h-16" :animation-data="userMarkerJson"></LottieSVG> -->
         </l-icon>
-        <l-popup :options="{offset: [0, -userMarkerIcon.iconSize[1]]}" content="You\'re here"></l-popup>
+        <l-popup :options="{offset: [0, -userMarkerIcon.iconSize[1]]}" content="You're here"></l-popup>
       </l-marker>
 
       <!-- bike station markers -->
@@ -35,6 +35,7 @@
               <img v-if="!showRent" src="@/assets/kt/icon_gps_return.svg" alt="">
               <!-- <LottieSVG class="h-16" :animation-data="userMarkerJson"></LottieSVG> -->
             </l-icon>
+            <l-popup :options="{offset: [0, -stationMarkerIcon.iconSize[1]]}" :content="popupContent(station)"></l-popup>
           </l-marker>
         </template>
       </template>
@@ -178,6 +179,24 @@ export default {
         return (this.showRent) ? station.availability.AvailableRentBikes : station.availability.AvailableReturnBikes;
       }
       return 'n/a';
+    },
+    popupContent(station) {
+      if (station) {
+        if (station.availability) {
+          return `
+            <div class="font-bold">${station.StationName.Zh_tw}</div>
+            <div>${station.StationAddress.Zh_tw}</div>
+            <hr class="my-2"/>
+            <div>可藉車輛 <span class="font-bold italic">${station.availability.AvailableRentBikes}</span></div>
+            <div>可停空位 <span class="font-bold italic">${station.availability.AvailableReturnBikes}</span></div>
+          `;
+        }
+        return `
+          <div class="font-bold">${station.StationName.Zh_tw}</div>
+          <div>${station.StationAddress.Zh_tw}</div>
+        `;
+      }
+      return '站點資訊不足';
     },
 
     ...mapActions('bike', ['getBikeStations']),
